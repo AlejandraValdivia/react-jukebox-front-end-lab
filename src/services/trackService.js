@@ -1,15 +1,16 @@
-const BASE_URL = `http://localhost:3000/tracks`;
+const BASE_URL = 'http://localhost:3000/tracks';  // Ensure this URL is correct
 
-const show = async (track) => {
-    try {
-        const response = await fetch(BASE_URL + `/${track.id}`);
-        const data = await response.json();
-        console.log(data);
-        return data;
-       
-    } catch (error) {
-        console.error(error);
+export const show = async () => {
+  try {
+    const response = await fetch(BASE_URL);
+    if (!response.ok) {
+      throw new Error(`Network response was not ok: ${response.statusText}`);
     }
-}
-
-export { show };
+    const data = await response.json();
+    console.log('Fetched data:', data);  // Add logging here
+    return data;
+  } catch (error) {
+    console.error('Error fetching data:', error);  // Add logging here
+    throw error;
+  }
+};

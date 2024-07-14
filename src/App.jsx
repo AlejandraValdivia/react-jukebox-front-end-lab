@@ -1,52 +1,40 @@
-import * as trackService from './services/trackService';
-import { useState, useEffect } from 'react';
-import './App.css'
+import * as trackService from "./services/trackService";
+import { useState, useEffect } from "react";
+import Home from "./components/Home/Home";
+import TrackList from "./components/TrackList/TrackList";
+import TrackForm from "./components/TrackForm/TrackForm";
+import "./App.css";
 
 const App = () => {
   const [tracks, setTracks] = useState([]);
-  
-  useEffect(() => {
-  const fetchDefaultData = async () => {
-    const data = await trackService.show({ id: 1 });
-    const newTrack = {
-      artist: data.artist,
-      name: data.name,
-      album: data.album,
-      genre: data.genre,
-      duration: data.duration,
-      id: 1
-    }
-    setTracks(data);
-  };
+  const [nowPlaying, setNowPlaying] = useState(null);
 
-  fetchDefaultData();
+  useEffect(() => {
+    const fetchDefaultData = async () => {
+      try {
+        const data = await trackService.show();
+        setTracks(data);
+        console.log("Tracks state after fetching:", data);
+      } catch (error) {
+        console.error("Error fetching tracks:", error);
+      }
+    };
+
+    fetchDefaultData();
   }, []);
 
-  const fetchData = async () => {
-    const data = await trackService.show({ id: 1 });
-    const newTrack = {
-      artist: data.artist,
-      name: data.name,
-      album: data.album,
-      genre: data.genre,
-      duration: data.duration,
-      id: 1
-    }
-    setTracks(newTrack);
+  const playTrack = (track) => {
+    setNowPlaying(track);
   };
-
-  console.log("State:", tracks);
-
-
 
   return (
     <>
-      <main className='main'>
-        <h1>React Jukebox</h1>
-        
-      </main>
+      <Home />
+      <TrackList tracks={tracks} playTrack={playTrack} />
+      <TrackForm />
     </>
-  )
+  );
 };
 
 export default App;
+
