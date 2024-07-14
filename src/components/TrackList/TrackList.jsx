@@ -1,9 +1,9 @@
 import React from 'react';
+import './TrackList.css';
 
 const TrackList = ({ tracks, onPlay, onEdit, onDelete }) => {
   return (
-    <div>
-      <h2>Track List</h2>
+    <div className="track-list">
       {tracks.map((track) => (
         <div key={track._id} style={{ marginBottom: '10px' }}>
           <p>{track.title} by {track.artist}</p>

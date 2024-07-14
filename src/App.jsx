@@ -52,13 +52,14 @@ const App = () => {
   };
 
   return (
-    <div className="App">
+    <div className="app">
       <Home />
       <button onClick={() => setShowForm(true)}>Add New Track</button>
       {showForm && (
         <TrackForm track={editingTrack} onSave={handleSaveTrack} onCancel={handleCancelForm} />
       )}
-      <TrackList
+      <h2>Track List</h2>
+      <TrackList className="track-list"
         tracks={tracks}
         onPlay={handlePlayTrack}
         onEdit={handleEditTrack}
