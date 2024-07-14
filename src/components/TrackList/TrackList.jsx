@@ -1,21 +1,19 @@
-import Track from "../Track/Track";
-import { tracks } from "../../data/data";
-import './TrackList.css';
+import React from 'react';
 
-const TrackList = (props) => {
-    const { tracks } = props;
-
-    const renderTrack = (track) => (
-        <Track key={track._id} track={track} />
-    );
-
-    const renderedTracks = tracks.map(renderTrack);
-
-    return (
-        <div className="track-list">
-            {renderedTracks}
+const TrackList = ({ tracks, onPlay, onEdit, onDelete }) => {
+  return (
+    <div>
+      <h2>Track List</h2>
+      {tracks.map((track) => (
+        <div key={track._id} style={{ marginBottom: '10px' }}>
+          <p>{track.title} by {track.artist}</p>
+          <button onClick={() => onPlay(track)}>Play</button>
+          <button onClick={() => onEdit(track)}>Edit</button>
+          <button onClick={() => onDelete(track._id)}>Delete</button>
         </div>
-    );
+      ))}
+    </div>
+  );
 };
 
 export default TrackList;

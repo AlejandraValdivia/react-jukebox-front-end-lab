@@ -1,0 +1,7 @@
+.add-new-track-btn {
+    background-color: orangered;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
