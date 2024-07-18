@@ -1,13 +1,15 @@
 const BASE_URL = 'http://localhost:3000/tracks';
 
-// Get all tracks from the server and return them as an array
+// Get all tracks
 export const getAllTracks = async () => {
   try {
     const response = await fetch(BASE_URL);
     if (!response.ok) {
       throw new Error(`Network response was not ok: ${response.statusText}`);
     }
-    return await response.json();
+    const data = await response.json();
+    console.log(data);
+    return data;
   } catch (error) {
     console.error('Error fetching tracks:', error);
     throw error;
@@ -65,4 +67,3 @@ export const deleteTrack = async (id) => {
     throw error;
   }
 };
-
